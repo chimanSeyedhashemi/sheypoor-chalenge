@@ -1,0 +1,32 @@
+.generalWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.generalBox {
+  border: 1px solid rgb(233, 233, 233);
+  border-radius: 0.4rem;
+  padding: 1rem;
+  width: 80%;
+}
+@media (min-width: 800px) {
+  .generalBox {
+    width: 50%;
+  }
+}
+
+.headerBox {
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
+
+  border-bottom: 1px solid rgb(233, 233, 233);
+
+  h5 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: rgb(31, 31, 31);
+  }
+}
