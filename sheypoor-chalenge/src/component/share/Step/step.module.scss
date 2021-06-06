@@ -1,0 +1,30 @@
+.stepWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1rem;
+  align-items: center;
+}
+
+.step {
+  background-color: #ebebff;
+  width: 30px;
+  border-radius: 50%;
+  height: 30px;
+  text-align: center;
+}
+
+.connection {
+  background-color: #ebebff;
+  height: 5px;
+  width: 100%;
+}
+
+.active {
+  width: 30px;
+  border-radius: 50%;
+  height: 30px;
+  text-align: center;
+  background-color: #00012b;
+  color: #ebebff;
+}
