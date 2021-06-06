@@ -1,9 +1,14 @@
-import { CreatUser } from "../user/Create";
+import React from "react";
+import { Footer } from "../Footer";
+import { CreateUser } from "../user/Create";
+import style from "./app.module.scss";
 
 function App() {
   return (
-    <div>
-      <CreatUser />
+    <div className={style.appWrapper}>
+      
+      <CreateUser />
+      <Footer/>
     </div>
   );
 }
