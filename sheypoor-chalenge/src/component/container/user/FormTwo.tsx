@@ -27,6 +27,12 @@ const initialInput: IInput = {
   },
 };
 
+const newsLetterOptions = [
+  { value: ENEWS_LETTER.DAILY, label: ENEWS_LETTER.DAILY },
+  { value: ENEWS_LETTER.WEEKLY, label: ENEWS_LETTER.WEEKLY },
+  { value: ENEWS_LETTER.MONTHLY, label: ENEWS_LETTER.MONTHLY },
+];
+
 export interface IFormTwo {
   email: string;
   newsletter: ENEWS_LETTER;
@@ -40,6 +46,16 @@ interface IProps {
 
 export const FormTwo = (props: IProps) => {
   const [inputs, setInputs] = useState<IInput>(initialInput);
+
+  /**
+   * this useEffect call when props.initialValue changed && in changing forms
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   *
+   * @beta
+   */
 
   useEffect(() => {
     let newData: IInput = {
@@ -58,6 +74,16 @@ export const FormTwo = (props: IProps) => {
     setInputs(newData);
   }, [props.initialValue]);
 
+  /**
+   * handleEmail function store input changes for email in inputs state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param e - The first input is onchange event object
+   *
+   * @beta
+   */
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     let isValid: boolean = AppRegex.email.test(e.target.value);
     setInputs({
@@ -66,25 +92,48 @@ export const FormTwo = (props: IProps) => {
     });
   };
 
-  const handleNewsletter = (
-    value: ValueType<ISelect, false>,
-    actionMeta: ActionMeta<ISelect>
-  ) => {
+  /**
+   * handleNewsletter function store input changes for newsletter in inputs state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param value - The first input is onchange event object which is the selected option data
+   *
+   * @beta
+   */
+
+  const handleNewsletter = (value: ValueType<ISelect, false>) => {
     setInputs({
       ...inputs,
       newsletter: { value: value!, isValid: true },
     });
   };
 
-  const disabled = (): boolean => {
-    return !inputs.email.isValid;
+  /**
+   * validation function return is valid form or not
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @return boolean for the state of validation
+   *
+   * @beta
+   */
+
+  const validation = (): boolean => {
+    return inputs.email.isValid;
   };
 
-  const newsLetterOptions = [
-    { value: ENEWS_LETTER.DAILY, label: ENEWS_LETTER.DAILY },
-    { value: ENEWS_LETTER.WEEKLY, label: ENEWS_LETTER.WEEKLY },
-    { value: ENEWS_LETTER.MONTHLY, label: ENEWS_LETTER.MONTHLY },
-  ];
+  /**
+   * handlePreview function prepare data to user state in parent component and call props.preview fun
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   *
+   * @beta
+   */
 
   const handlePreview = () => {
     const data: IFormTwo = {
@@ -93,6 +142,16 @@ export const FormTwo = (props: IProps) => {
     };
     props.preview(data);
   };
+
+  /**
+   * handleSubmitUser function prepare data to user state in parent component and call props.submitUser fun
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   *
+   * @beta
+   */
 
   const handleSubmitUser = () => {
     const data: IFormTwo = {
@@ -134,7 +193,7 @@ export const FormTwo = (props: IProps) => {
           title={translator.createUser}
           btnClassName="btn-primary"
           onClick={handleSubmitUser}
-          disabled={disabled()}
+          disabled={!validation()}
         />
       </div>
     </>

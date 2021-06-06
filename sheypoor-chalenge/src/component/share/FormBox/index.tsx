@@ -4,6 +4,19 @@ interface IProps {
   title?: string;
 }
 
+  /**
+   * FormBox componet create a main box for covering form
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param props - The props for FormBox component
+   *
+   * @returns ReactNode 
+   *
+   * @beta
+   */
+
 const FormBox = (props: IProps) => {
   return (
     <>

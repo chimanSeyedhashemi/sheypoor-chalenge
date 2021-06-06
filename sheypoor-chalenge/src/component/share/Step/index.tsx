@@ -6,6 +6,19 @@ interface IProps {
   activeStep: number;
 }
 
+/**
+ * createSteps function generate an array for create steps
+ *
+ * @remarks
+ * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+ *
+ * @param steps - The first input is the number of steps in wizard
+ *
+ * @returns array of number of steps
+ *
+ * @beta
+ */
+
 const createSteps = (steps: number): Array<number> => {
   let newSteps: Array<number> = [];
   if (steps < 2) return [];

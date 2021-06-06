@@ -6,7 +6,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function AppButton(props: ButtonProps) {
-  function inputOriginAttr(props: ButtonProps): ButtonProps {
+  /**
+   * buttonOriginAttr function prepare props to copy in main element
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param props - The first input is ButtonProps
+   *
+   * @returns new props for button element
+   *
+   * @beta
+   */
+  function buttonOriginAttr(props: ButtonProps): ButtonProps {
     let newP = { ...props };
     delete newP.className;
     delete newP.btnClassName;
@@ -17,7 +29,7 @@ export function AppButton(props: ButtonProps) {
   return (
     <button
       className={`btn ${props.btnClassName ? props.btnClassName : ""}`}
-      {...inputOriginAttr(props)}
+      {...buttonOriginAttr(props)}
     >
       {props.title}
     </button>

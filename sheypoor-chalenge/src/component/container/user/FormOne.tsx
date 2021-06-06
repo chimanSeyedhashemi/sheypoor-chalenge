@@ -27,6 +27,16 @@ interface IProps {
 export const FormOne = (props: IProps) => {
   const [inputs, setInputs] = useState<IInput>(initialInput);
 
+  /**
+   * this useEffect call when props.initialValue changed && in changing forms
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   *
+   * @beta
+   */
+
   useEffect(() => {
     let newData: IInput = {
       name: {
@@ -41,6 +51,19 @@ export const FormOne = (props: IProps) => {
     setInputs(newData);
   }, [props.initialValue]);
 
+  
+
+  /**
+   * handleChange function store input changesin inputs state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param e - The first input is onchange event object
+   *
+   * @beta
+   */
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     let isValid: boolean = e.target.value ? true : false;
     setInputs({
@@ -49,12 +72,32 @@ export const FormOne = (props: IProps) => {
     });
   };
 
-  const disabled = (): boolean => {
+  /**
+   * validation function return is valid form or not
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @return boolean for the state of validation
+   *
+   * @beta
+   */
+  const validation = (): boolean => {
     if (inputs.name.isValid && inputs.age.isValid) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   };
+
+  /**
+   * next function prepare data to user state in parent component and call props.next fun
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   *
+   * @beta
+   */
 
   const next = () => {
     const data: IFormOne = {
@@ -91,7 +134,7 @@ export const FormOne = (props: IProps) => {
           title={translator.next}
           btnClassName="btn-primary"
           onClick={next}
-          disabled={disabled()}
+          disabled={!validation()}
         />
       </div>
     </>

@@ -25,21 +25,64 @@ export const CreateUser = () => {
   const [current, setCurrent] = useState<number>(1);
   const [user, setUser] = useState<IUser>(initialUser);
 
+  /**
+   * change form from the first to the second in for create user and store user in the user state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param values - The first input is data from the first form
+   *
+   * @beta
+   */
+
   const next = (values: IFormOne) => {
     setUser({ ...user, ...values });
     setCurrent(2);
   };
+
+  /**
+   * change form from the second to the first in for create user and store user data from form2 in the user state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param values - The first input is data from the second form
+   *
+   * @beta
+   */
 
   const preview = (values: IFormTwo) => {
     setUser({ ...user, ...values });
     setCurrent(1);
   };
 
+  /**
+   * save user data from form2 in the user store create user and store user in the user state and call createUser request
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param values - The first input is data from the first form
+   *
+   * @beta
+   */
+
   const submitUser = (values: IFormTwo) => {
     let newUser: IUser = { ...user, ...values };
     createUser(newUser);
   };
 
+  /**
+   * initialize form one data from user state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @return required data to form 1
+   *
+   * @beta
+   */
   const initialFormOne = (): IFormOne => {
     return {
       name: user.name,
@@ -47,12 +90,34 @@ export const CreateUser = () => {
     };
   };
 
+  /**
+   * initialize form one data from user state
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @return required data for form 2
+   *
+   * @beta
+   */
+
   const initialFormTwo = (): IFormTwo => {
     return {
       email: user.email,
       newsletter: user.newsletter,
     };
   };
+
+  /**
+   * asyncfunction to send data to an virtual server to create user
+   *
+   * @remarks
+   * This method is part of the {@link core-library#syepoor_chalenge | Sheipoor subsystem}.
+   *
+   * @param user - The first input is user data
+   *
+   * @beta
+   */
 
   const createUser = async (user: IUser) => {
     try {
