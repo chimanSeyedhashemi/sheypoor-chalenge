@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { AppButton } from "../../share/form/Button";
 import { AppInput } from "../../share/form/Input";
 import { ENEWS_LETTER } from "./enum";
@@ -6,19 +6,39 @@ import { ENEWS_LETTER } from "./enum";
 interface IInput {
   name: { value: string; isValid: boolean };
   age: { value: number; isValid: boolean };
-  //  email: {value:string, isValid:boolean};
-  // newsletter: {value:ENEWS_LETTER, isValid:boolean};
 }
 
 const initialInput: IInput = {
   name: { value: "", isValid: false },
   age: { value: 0, isValid: false },
-  // email:{value:"", isValid:false},
-  // newsletter:{value:ENEWS_LETTER.MONTHLY, isValid:false}
 };
 
-export const FormOne = () => {
+export interface IFormOne {
+  name: string;
+  age: number;
+}
+
+interface IProps {
+  next(value: IFormOne): void;
+  initialValue: IFormOne;
+}
+
+export const FormOne = (props: IProps) => {
   const [inputs, setInputs] = useState<IInput>(initialInput);
+
+  useEffect(() => {
+    let newData: IInput = {
+      name: {
+        value: props.initialValue.name,
+        isValid: props.initialValue.name ? true : false,
+      },
+      age: {
+        value: props.initialValue.age,
+        isValid: props.initialValue.age ? true : false,
+      },
+    };
+    setInputs(newData);
+  }, [props.initialValue]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     let isValid: boolean = e.target.value ? true : false;
@@ -26,7 +46,6 @@ export const FormOne = () => {
       ...inputs,
       [e.target.name]: { value: e.target.value, isValid },
     });
-    console.log(e.target.name, e.target.value);
   };
 
   const disabled = (): boolean => {
@@ -36,14 +55,30 @@ export const FormOne = () => {
     return true;
   };
 
+  const next = () => {
+    const data: IFormOne = {
+      name: inputs.name.value,
+      age: inputs.age.value,
+    };
+
+    props.next(data);
+  };
+
   return (
     <>
       <div className="m-1">
-        <AppInput lable="name:" required name="name" onChange={handleChange} />
+        <AppInput
+          lable="name:"
+          required
+          name="name"
+          onChange={handleChange}
+          value={inputs.name.value}
+        />
       </div>
       <div className="m-1">
         <AppInput
           lable="age:"
+          value={inputs.age.value}
           name="age"
           type="number"
           required
@@ -52,8 +87,9 @@ export const FormOne = () => {
       </div>
       <div className="m-1 d-flex justify-content-end">
         <AppButton
-          title="next"
+          title="Next"
           btnClassName="btn-primary"
+          onClick={next}
           disabled={disabled()}
         />
       </div>
