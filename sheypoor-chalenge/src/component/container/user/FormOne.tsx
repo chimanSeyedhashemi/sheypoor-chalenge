@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
+import { translator } from "../../../constant/translator";
 import { AppButton } from "../../share/form/Button";
 import { AppInput } from "../../share/form/Input";
 import { ENEWS_LETTER } from "./enum";
@@ -68,7 +69,7 @@ export const FormOne = (props: IProps) => {
     <>
       <div className="m-1">
         <AppInput
-          lable="name:"
+          lable={`${translator.name}:`}
           required
           name="name"
           onChange={handleChange}
@@ -77,7 +78,7 @@ export const FormOne = (props: IProps) => {
       </div>
       <div className="m-1">
         <AppInput
-          lable="age:"
+          lable={`${translator.age}:`}
           value={inputs.age.value}
           name="age"
           type="number"
@@ -87,7 +88,7 @@ export const FormOne = (props: IProps) => {
       </div>
       <div className="m-1 d-flex justify-content-end">
         <AppButton
-          title="Next"
+          title={translator.next}
           btnClassName="btn-primary"
           onClick={next}
           disabled={disabled()}

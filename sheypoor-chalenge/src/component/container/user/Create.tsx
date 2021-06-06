@@ -9,6 +9,7 @@ import { ENEWS_LETTER } from "./enum";
 import { FormOne, IFormOne } from "./FormOne";
 import { FormTwo, IFormTwo } from "./FormTwo";
 import { Step } from "../../share/Step";
+import { translator } from "../../../constant/translator";
 // import { createUser } from 'sdk'
 
 let newSdk: any = sdk;
@@ -56,19 +57,17 @@ export const CreateUser = () => {
   const createUser = async (user: IUser) => {
     try {
       let res = await newSdk.createUser(user);
-      alert("User Create");
+      alert(translator.uiMsg.theActionWasSuccesfull);
     } catch (error) {
-      alert("There is a problem");
+      alert(translator.uiMsg.thereIsAProblem);
     }
   };
-
-
 
   return (
     <div className={style.createWrapper}>
       <Step stepsNumber={2} activeStep={current} />
 
-      <FormBox title="create user">
+      <FormBox title={translator.createUser}>
         {current === 1 ? (
           <FormOne next={next} initialValue={initialFormOne()} />
         ) : (

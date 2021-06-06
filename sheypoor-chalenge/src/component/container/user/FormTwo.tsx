@@ -4,6 +4,7 @@ import { AppButton } from "../../share/form/Button";
 import { AppInput } from "../../share/form/Input";
 import { ENEWS_LETTER } from "./enum";
 import Select, { ActionMeta, ValueType } from "react-select";
+import { translator } from "../../../constant/translator";
 
 interface ISelect {
   value: ENEWS_LETTER;
@@ -105,7 +106,7 @@ export const FormTwo = (props: IProps) => {
     <>
       <div className="m-1">
         <AppInput
-          lable="email:"
+          lable={`${translator.email}:`}
           required
           name="email"
           onChange={handleEmail}
@@ -113,9 +114,8 @@ export const FormTwo = (props: IProps) => {
         />
       </div>
       <div className="m-1 form-group">
-        <label>newsletter:</label>
+        <label>{`${translator.newsletter}:`}</label>
         <Select
-          lable="newsletter:"
           name="newsletter"
           options={newsLetterOptions}
           required
@@ -126,12 +126,12 @@ export const FormTwo = (props: IProps) => {
       <div className="mt-4 d-flex justify-content-end">
         <AppButton
           style={{ marginRight: ".2rem" }}
-          title="Preview"
+          title={translator.preview}
           btnClassName="btn-secondary"
           onClick={handlePreview}
         />
         <AppButton
-          title="Done"
+          title={translator.createUser}
           btnClassName="btn-primary"
           onClick={handleSubmitUser}
           disabled={disabled()}
