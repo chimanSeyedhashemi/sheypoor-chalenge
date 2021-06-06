@@ -9,12 +9,16 @@ export function AppButton(props: ButtonProps) {
   function inputOriginAttr(props: ButtonProps): ButtonProps {
     let newP = { ...props };
     delete newP.className;
+    delete newP.btnClassName;
 
     return newP;
   }
 
   return (
-    <button className={`btn ${props.btnClassName}`} {...inputOriginAttr(props)}>
+    <button
+      className={`btn ${props.btnClassName ? props.btnClassName : ""}`}
+      {...inputOriginAttr(props)}
+    >
       {props.title}
     </button>
   );
